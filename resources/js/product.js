@@ -14,19 +14,20 @@ $(document).ready(function () {
         }
     });
 
-    /*  $(".btnDeleteUser").on("click", function () {
+    $(".btnDeleteProduct").on("click", function () {
         Swal.fire({
             title: "¿Estas seguro?",
             text: "¡No podrás revertir esto!",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3b82f6",
-            cancelButtonColor: "#ef4444",
+            confirmButtonColor: "#6d28d9",
+            cancelButtonColor: "#c41b22",
             confirmButtonText: "Sí, eliminar",
+            cancelButtonText: "Cancelar",
         }).then((result) => {
             if (result.isConfirmed) {
-                $("#formUser").submit();
+                $("#formDeleteProduct").submit();
             }
         });
-    }); */
+    });
 });
