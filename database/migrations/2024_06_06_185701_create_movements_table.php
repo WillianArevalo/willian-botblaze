@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('movements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained("product")->onDelete("cascade");
+            $table->foreignId('product_id')->constrained("products")->onDelete("cascade");
             $table->string("typeMovement")->enum = ["output", "input"];
             $table->integer("quantity");
             $table->text("description");
