@@ -9,6 +9,8 @@ export default defineConfig({
                 "resources/js/app.js",
                 "resources/js/jquery.js",
                 "resources/js/userMenu.js",
+                "resources/js/customSelect.js",
+                "resources/js/product.js",
             ],
             refresh: true,
         }),
