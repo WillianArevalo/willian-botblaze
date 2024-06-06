@@ -8,12 +8,12 @@
     <section class="pt-16 ml-64">
         <div class="text-white bg-black rounded-md sm:p-8">
             <div class="flex items-center gap-2 justify-left">
-                <h1 class="text-3xl font-bold text-violet-600">Nuevo producto</h1>
+                <h1 class="font-bold text-1xl text-violet-600 sm:text-3xl">Nuevo producto</h1>
             </div>
             <div class="mt-4">
                 <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="flex flex-col gap-4 text-sm">
+                    <div class="flex flex-col gap-4 text-base">
                         <div class="flex flex-col w-full gap-2 md:flex-row">
                             <div class="flex flex-col gap-2 sm:flex-[1] lg:flex-[4]">
                                 <label class="text-white after:content-['*'] after:ml-0.5 after:text-red-500"
@@ -119,7 +119,7 @@
                                 Imagen:
                             </label>
                             <button
-                                class="flex items-center justify-center gap-2 px-4 py-3 border rounded text-violet-600 border-violet-600 w-max hover:bg-violet-800 hover:text-white"
+                                class="flex items-center justify-center gap-2 px-4 py-3 rounded w-max text-violet-400 bg-violet-800 bg-opacity-10 hover:bg-opacity-20"
                                 type="button" id="uploadImage">
                                 <x:svg-icon icon="add-image" class="w-5 h-5 text-current" />
                                 Seleccionar imagen
@@ -137,9 +137,9 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="flex justify-center gap-2 mt-6 text-sm">
+                    <div class="flex justify-center gap-2 mt-6 text-base">
                         <button type="submit"
-                            class="flex items-center justify-center gap-2 p-3 px-5 text-white border rounded bg-violet-600 border-violet-600 w-max hover:bg-violet-800 hover:text-white focus:outline-none">
+                            class="flex items-center justify-center gap-2 p-3 px-5 rounded w-max text-violet-400 bg-violet-800 bg-opacity-10 hover:bg-opacity-20">
                             <x:svg-icon icon="add-circle" class="w-5 h-5 text-current" />
                             Agregar
                         </button>

@@ -14,7 +14,7 @@
                 <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <div class="flex flex-col gap-4 text-sm">
+                    <div class="flex flex-col gap-4 text-base">
                         <div class="flex flex-col w-full gap-2 md:flex-row">
                             <div class="flex flex-col gap-2 sm:flex-[1] lg:flex-[4]">
                                 <label class="text-white after:content-['*'] after:ml-0.5 after:text-red-500"
@@ -120,7 +120,7 @@
                                 Imagen:
                             </label>
                             <button
-                                class="flex items-center justify-center gap-2 px-4 py-3 border rounded text-violet-600 border-violet-600 w-max hover:bg-violet-800 hover:text-white"
+                                class="flex items-center justify-center gap-2 px-4 py-3 rounded w-max text-violet-400 bg-violet-800 bg-opacity-10 hover:bg-opacity-20"
                                 type="button" id="uploadImage">
                                 <x:svg-icon icon="add-image" class="w-5 h-5 text-current" />
                                 Seleccionar imagen
@@ -138,9 +138,9 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="flex justify-center gap-2 mt-6 text-sm">
+                    <div class="flex justify-center gap-2 mt-6 text-base">
                         <button type="submit"
-                            class="flex items-center justify-center gap-2 p-3 px-5 text-white bg-green-600 border border-green-500 rounded w-max hover:bg-green-800 hover:text-white focus:outline-none">
+                            class="flex items-center justify-center gap-2 p-3 px-5 text-green-100 bg-green-600 rounded bg-opacity-20 w-max hover:bg-opacity-40 hover:text-white focus:outline-none">
                             <x:svg-icon icon="edit" class="w-5 h-5 text-current" />
                             Editar
                         </button>
