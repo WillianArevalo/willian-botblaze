@@ -26,7 +26,7 @@ $(document).ready(function () {
             cancelButtonText: "Cancelar",
         }).then((result) => {
             if (result.isConfirmed) {
-                $("#formDeleteProduct").submit();
+                $(this).parent().submit();
             }
         });
     });
