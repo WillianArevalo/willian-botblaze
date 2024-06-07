@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <section class="pt-16 ml-64">
+    <section class="text-sm md:text-base">
         <div class="text-white bg-black rounded-md sm:p-8">
             <div class="flex items-center gap-2 justify-left">
                 <h1 class="font-bold text-1xl text-violet-600 sm:text-3xl">Nuevo producto</h1>
@@ -13,7 +13,7 @@
             <div class="mt-4">
                 <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="flex flex-col gap-4 text-base">
+                    <div class="flex flex-col gap-4 ">
                         <div class="flex flex-col w-full gap-2 md:flex-row">
                             <div class="flex flex-col gap-2 sm:flex-[1] lg:flex-[4]">
                                 <label class="text-white after:content-['*'] after:ml-0.5 after:text-red-500"
@@ -136,7 +136,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="flex justify-center gap-2 mt-6 text-base">
+                    <div class="flex justify-center gap-2 mt-6 ">
                         <button type="submit"
                             class="flex items-center justify-center gap-2 p-3 px-5 rounded w-max text-violet-400 bg-violet-800 bg-opacity-10 hover:bg-opacity-20">
                             <x:svg-icon icon="add-circle" class="w-5 h-5 text-current" />
