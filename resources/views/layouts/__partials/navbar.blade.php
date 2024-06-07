@@ -1,5 +1,5 @@
 <header
-    class="top-0 z-20 hidden w-full h-screen p-5 text-sm text-white border-r lg:fixed border-zinc-900 sm:w-1/2 md:w-1/3 lg:w-auto lg:block adminHeader sm:text-base">
+    class="fixed top-0 z-20 hidden w-full h-screen p-5 text-sm text-white border-r border-zinc-900 sm:w-1/2 md:w-1/3 lg:w-auto lg:block adminHeader sm:text-base">
     <button
         class="absolute top-0 right-0 p-2 m-4 text-current rounded bg-zinc-900 hover:bg-zinc-950 buttonClose lg:hidden">
         <x:svg-icon icon="close" class="w-5 h-5 text-current" />
@@ -40,5 +40,8 @@
                 </a>
             </li>
         </ul>
+        <div class="hidden p-3 mt-auto text-sm rounded bg-zinc-950 sm:block">
+            Willian Arévalo &copy; 2024
+        </div>
     </nav>
 </header>

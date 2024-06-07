@@ -1,6 +1,5 @@
 <section>
-    <div
-        class="absolute right-0 z-10 w-full px-4 py-3 text-white bg-black border-b border-zinc-900 topBar sm:px-8 lg:fixed">
+    <div class="right-0 z-10 w-full px-4 py-3 text-white bg-black border-b  border-zinc-900 topBar sm:px-8">
         <div class="flex items-center justify-between text-sm lg:justify-end sm:text-base">
             <button
                 class="flex items-center justify-end p-2 border-none rounded bg-zinc-900 hover:bg-zinc-950 lg:hidden buttonHamburger">

@@ -4,7 +4,7 @@
 @section('title', 'Movimientos')
 
 @section('content')
-    <section class="pt-16 ml-0 text-sm lg:ml-64 sm:text-base">
+    <section class="text-sm  sm:text-base">
         <div class="h-full p-4 text-white sm:p-8">
             <div class="flex items-center gap-2 justify-left">
                 <h1 class="text-2xl font-bold uppercase text-violet-600 sm:text-3xl">Movimientos</h1>

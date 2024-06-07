@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <section class="pt-16 text-sm lg:ml-64 md:text-base">
+    <section class="text-sm  md:text-base">
         <div class="p-4 text-white bg-black rounded-md sm:p-8">
             <div class="flex items-center gap-2 justify-left">
                 <h1 class="text-2xl font-bold text-violet-600 sm:text-3xl">
