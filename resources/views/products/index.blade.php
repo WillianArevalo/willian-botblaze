@@ -35,7 +35,10 @@
                                     Precio
                                 </th>
                                 <th class="px-6 py-6 text-base font-medium leading-4">
-                                    Stock
+                                    Stock inicial
+                                </th>
+                                <th class="px-6 py-6 text-base font-medium leading-4">
+                                    Stock actual
                                 </th>
                                 <th class="px-6 py-6 text-base font-medium leading-4">
                                     Estado
@@ -65,27 +68,29 @@
                                         {{ "$" . $product->price }}
                                     </td>
                                     <td class="px-6 py-2 text-base border-b-4 border-black whitespace-nowrap">
+                                        {{ $product->stockInitial }}
+                                    </td>
+                                    <td class="px-6 py-2 text-base border-b-4 border-black whitespace-nowrap">
                                         {{ $product->stockCurrent }}
                                     </td>
                                     <td class="px-6 py-2 text-base border-b-4 border-black whitespace-nowrap">
                                         @switch($product->status)
                                             @case('in_stock')
                                                 <span
-                                                    class="px-4 py-1 text-base text-green-200 uppercase bg-green-600 bg-opacity-20 rounded-3xl">
+                                                    class="px-4 py-1 text-base text-green-200 bg-green-600 bg-opacity-20 rounded-3xl">
                                                     Disponible
                                                 </span>
                                             @break
 
                                             @case('out_of_stock')
-                                                <span
-                                                    class="px-4 py-1 text-base text-red-200 uppercase bg-red-600 bg-opacity-20 rounded-3xl">
+                                                <span class="px-4 py-1 text-base text-red-200 bg-red-600 bg-opacity-20 rounded-3xl">
                                                     Agotado
                                                 </span>
                                             @break
 
                                             @case('warning')
                                                 <span
-                                                    class="px-4 py-1 text-base text-yellow-200 uppercase bg-yellow-600 bg-opacity-20 rounded-3xl">
+                                                    class="px-4 py-1 text-base text-yellow-200 bg-yellow-600 bg-opacity-20 rounded-3xl">
                                                     Por agotarse
                                                 </span>
 
@@ -116,7 +121,7 @@
                                     </tr>
                                     @empty
                                         <tr class="text-center border-t-2 border-black bg-zinc-950">
-                                            <td class="px-6 py-4 text-base border-b-2 border-black" colspan="7">
+                                            <td class="px-6 py-4 text-base border-b-2 border-black" colspan="8">
                                                 No hay productos registrados
                                             </td>
                                         </tr>

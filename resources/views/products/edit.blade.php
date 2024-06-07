@@ -22,7 +22,7 @@
                                     Nombre:
                                 </label>
                                 <div
-                                    class="flex items-center w-full text-white border-2  rounded bg-zinc-900 focus-within:border-violet-600 @error('name') border-red-500 @else border-zinc-800 @enderror">
+                                    class="flex items-center w-full text-white border-2  rounded bg-zinc-900 focus-within:border-violet-600 @error('name') error @else border-zinc-800 @enderror">
                                     <input type="text" name="name" id="name"
                                         class="w-full p-3 pl-5 text-white bg-transparent border-none focus:outline-none placeholder:text-zinc-600"
                                         placeholder="Ingresa el nombre del producto" value="{{ $product->name }}">
@@ -46,7 +46,7 @@
                                     Descripción:
                                 </label>
                                 <div
-                                    class="flex items-center w-full text-white border-2  rounded bg-zinc-900 focus-within:border-violet-600 @error('description') border-red-500 @else border-zinc-800 @enderror">
+                                    class="flex items-center w-full text-white border-2  rounded bg-zinc-900 focus-within:border-violet-600 @error('description') error @else border-zinc-800 @enderror">
                                     <textarea name="description" id="description" cols="30" rows="10"
                                         class="w-full p-3 pl-5 text-white bg-transparent border-none resize-none focus:outline-none placeholder:text-zinc-600"
                                         placeholder="Ingrese la descripción del producto">{{ $product->description }}</textarea>
@@ -71,7 +71,7 @@
                                     Precio:
                                 </label>
                                 <div
-                                    class="flex items-center w-full text-white border-2  rounded bg-zinc-900 focus-within:border-violet-600 @error('price') border-red-500 @else border-zinc-800 
+                                    class="flex items-center w-full text-white border-2  rounded bg-zinc-900 focus-within:border-violet-600 @error('price') error @else border-zinc-800 
                                     @enderror">
                                     <span class="flex items-center justify-center p-2 text-violet-500">
                                         <x:svg-icon icon="dollar" class="w-5 h-5 text-current" />
@@ -98,16 +98,22 @@
                                     Cantidad inicial:
                                 </label>
                                 <div
-                                    class="flex items-center w-full text-white border-2  rounded bg-zinc-900 focus-within:border-violet-600 @error('stockInitial') border-red-500 @else border-zinc-800 @enderror">
+                                    class="flex items-center w-full text-white border-2  rounded bg-zinc-900 focus-within:border-violet-600 @error('stockInitial') error @else border-zinc-800 @enderror">
                                     <input type="number" name="stockInitial" id="stockInitial"
                                         class="w-full p-3 pl-5 text-white bg-transparent border-none focus:outline-none placeholder:text-zinc-600"
-                                        placeholder="Ingrese el correo del usuario" value="{{ $product->stockInitial }}">
+                                        placeholder="Ingrese el correo del usuario" value="{{ $product->stockInitial }}"
+                                        @if ($searchMovement) readonly @endif>
                                     @error('stockInitial')
                                         <span class="flex items-center justify-center p-2 text-red-500">
                                             <x:svg-icon icon="warning" class="w-5 h-5 text-current" />
                                         </span>
                                     @enderror
                                 </div>
+                                @if ($searchMovement)
+                                    <span class="flex items-center p-2 text-xs text-red-500">
+                                        No se puede editar la cantidad inicial, ya que existen movimientos registrados
+                                    </span>
+                                @endif
                                 @error('stockInitial')
                                     <span class="text-red-500">
                                         {{ $message }}
@@ -127,7 +133,7 @@
                             </button>
                             <input type="file" class="hidden" name="image" id="image" accept=".jpg, .png, .jpeg">
                             <div
-                                class="flex items-center justify-center w-full p-4 border-2  border-dashed rounded-md @error('image') border-red-500 @else border-violet-600 @enderror">
+                                class="flex items-center justify-center w-full p-4 border-2  border-dashed rounded-md @error('image') error @else border-violet-600 @enderror">
                                 <img src="{{ asset('images/products/' . $product->image) }}" alt="Not photo" width="350"
                                     height="350" class="object-cover rounded" id="previewImage">
                             </div>

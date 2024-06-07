@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Models\Movement;
 use App\Models\Product;
 use Dotenv\Validator;
 use Illuminate\Support\Facades\File;
@@ -41,8 +42,16 @@ class ProductController extends Controller
             $file->move(public_path() . "/images/products", $name);
             $validateData["image"] = $name;
         }
-        Product::create($validateData);
-        return redirect()->route("products.index")->with("success", "Product created");
+
+        $product = Product::create($validateData);
+        $movement = new Movement();
+        $movement->product_id = $product->id;
+        $movement->typeMovement = "input";
+        $movement->quantity = $product->stockInitial;
+        $movement->description = "Entrada inicial del producto";
+        $movement->date = now();
+        $movement->save();
+        return redirect()->route("products.index")->with("success", "Product created and movement initial created");
     }
 
     /**
@@ -65,7 +74,12 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         if ($product) {
-            return view("products.edit", ["product" => $product]);
+            $searchMovement = false;
+            $movement = Movement::where("product_id", $product->id);
+            if ($movement->count() > 0) {
+                $searchMovement = true;
+            }
+            return view("products.edit", ["product" => $product, "searchMovement" => $searchMovement]);
         } else {
             return redirect()->route("products.index")->with("error", "Product not found");
         }
@@ -78,6 +92,14 @@ class ProductController extends Controller
     {
         $validateData = $request->validated();
         $product = Product::find($id);
+
+        $movement = Movement::where("product_id", $product->id);
+        if ($movement->count() > 0) {
+            if ($product->stockInitial != $validateData["stockInitial"]) {
+                return redirect()->route("products.index")->with("error", "Product has movements");
+            }
+        }
+
         if ($product) {
             if ($request->hasFile("image")) {
 
@@ -93,6 +115,8 @@ class ProductController extends Controller
                 $file->move(public_path() . "/images/products", $name);
                 $validateData["image"] = $name;
             }
+            $newStockCurrent = $product->stockCurrent - $product->stockInitial + $validateData["stockInitial"];
+            $validateData["stockCurrent"] = $newStockCurrent;
             $product->update($validateData);
             return redirect()->route("products.index")->with("success", "Product updated");
         } else {
