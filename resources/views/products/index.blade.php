@@ -103,8 +103,7 @@
                                                     class="flex items-center justify-center gap-2 px-2 py-2 text-green-500 rounded hover:bg-green-700 hover:bg-opacity-10">
                                                     <x:svg-icon icon="edit" class="w-6 h-6 text-current" />
                                                 </a>
-                                                <form action="{{ route('products.destroy', $product->id) }}" method="POST"
-                                                    id="formDeleteProduct">
+                                                <form action="{{ route('products.destroy', $product->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="button"
