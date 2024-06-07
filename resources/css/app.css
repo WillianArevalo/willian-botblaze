@@ -29,8 +29,17 @@ body.overflow-hidden {
 }
 
 /* TopBar user */
-.topBar {
+main {
+    height: 100%;
+}
+
+main,
+footer {
     width: calc(100% - 249px);
+    margin-left: auto;
+}
+
+.topBar {
     background: rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -118,7 +127,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* Responsive */
 
 @media (max-width: 1024px) {
-    .topBar {
+    main,
+    footer {
         width: 100%;
     }
 }

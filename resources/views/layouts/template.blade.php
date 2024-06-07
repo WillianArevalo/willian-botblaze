@@ -17,10 +17,8 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 
-<body class="relative overflow-x-hidden bg-black body">
-
+<body class="flex flex-col overflow-x-hidden bg-black body">
     @include('layouts.__partials.alert')
-
     @if (Route::currentRouteName() !== 'login')
         @include('layouts.__partials.navbar')
     @endif
@@ -30,6 +28,7 @@
         @endif
         @yield('content')
     </main>
+    @include('layouts.__partials.footer')
 </body>
 @vite('resources/js/app.js')
 
