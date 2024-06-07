@@ -11,6 +11,7 @@ export default defineConfig({
                 "resources/js/userMenu.js",
                 "resources/js/customSelect.js",
                 "resources/js/product.js",
+                "resources/js/movement.js",
             ],
             refresh: true,
         }),
