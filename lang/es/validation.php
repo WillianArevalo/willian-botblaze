@@ -195,7 +195,10 @@ return [
         "price" => "del precio",
         "stockInitial" => "de la cantidad inicial",
         "image" => "de la imagen",
-        "email" => "correo electronico"
+        "email" => "correo electronico",
+        "product_id" => "del producto",
+        "quantity" => "de la cantidad",
+        "date" => "de la fecha",
     ],
 
 ];
