@@ -30,4 +30,30 @@ $(document).ready(function () {
             }
         });
     });
+
+    $("#inputSearchProduct").on("input", function () {
+        let data = $("#formSearch").serialize();
+        $("#inputSearchStatus").val("");
+        $.ajax({
+            url: $("#formSearch").attr("action"),
+            type: "POST",
+            data: data,
+            success: function (response) {
+                $("#tableProduct").html(response);
+            },
+        });
+    });
+
+    $("#searchStatus").on("searchStatus", function () {
+        let data = $("#formSearchStatus").serialize();
+        $("#inputSearchProduct").val("");
+        $.ajax({
+            url: $("#formSearchStatus").attr("action"),
+            type: "POST",
+            data: data,
+            success: function (response) {
+                $("#tableProduct").html(response);
+            },
+        });
+    });
 });

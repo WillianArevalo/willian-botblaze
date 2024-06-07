@@ -16,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(10);
         return view("products.index", ["products" => $products]);
     }
 
@@ -33,7 +33,6 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-
         $validateData = $request->validated();
         $validateData["stockCurrent"] = $validateData["stockInitial"];
         if ($request->hasFile("image")) {
@@ -130,7 +129,6 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         $product = Product::find($id);
-
         if ($product) {
             if ($product->image) {
                 $imagePath = public_path("images/products/" . $product->image);
@@ -143,5 +141,21 @@ class ProductController extends Controller
         } else {
             return redirect()->route("products.index")->with("error", "Product not found");
         }
+    }
+
+    public function search(Request $request)
+    {
+        $query = Product::query();
+        if ($request->input("searchProduct")) {
+            $name = $request->input("searchProduct");
+            $query->where("name", "like", "%$name%");
+        }
+
+        if ($request->input("searchStatus")) {
+            $status = $request->input("searchStatus");
+            $query->where("status", $status);
+        }
+        $products = $query->get();
+        return view("layouts.__partials.product-row", ["products" => $products]);
     }
 }

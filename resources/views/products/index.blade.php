@@ -18,6 +18,53 @@
                         Nuevo producto
                     </a>
                 </div>
+                <div class="mb-4">
+                    <div class="flex justify-between flex-1 gap-2">
+                        <div
+                            class="flex items-center w-full text-white border-2 rounded bg-zinc-900 focus-within:border-violet-600 border-zinc-800 flex-[2]">
+                            <span class="flex items-center justify-center p-2 text-violet-500">
+                                <x:svg-icon icon="search" class="w-5 h-5 text-current" />
+                            </span>
+                            <form action="{{ route('products.search') }}" method="POST" id="formSearch" class="w-full">
+                                @csrf
+                                <input type="text" name="searchProduct"
+                                    class="w-full p-3 pl-5 text-white bg-transparent border-none focus:outline-none placeholder:text-zinc-600"
+                                    placeholder="Buscar producto..." id="inputSearchProduct">
+                            </form>
+                        </div>
+                        <div class="relative flex flex-col flex-1 gap-2 text-base custom-select" id="filtrerStatus">
+                            <form action="{{ route('products.search') }}" method="POST" id="formSearchStatus"
+                                class="hidden">
+                                @csrf
+                                <input type="hidden" name="searchStatus" id="searchStatus">
+                            </form>
+                            <div
+                                class="flex justify-between p-3 pl-5 text-white border-2 rounded selected bg-zinc-900 border-zinc-800">
+                                <span class="flex items-center item-selected">
+                                    Filtrar por
+                                </span>
+                                <span class="flex items-center gap-2 ">
+                                    <x:svg-icon icon="arrow-down" class="w-5 h-5 text-white arrow-select" />
+                                </span>
+                            </div>
+                            <div
+                                class="absolute z-20 flex flex-col w-full overflow-hidden text-black border-2 rounded bg-zinc-100 items-selected top-14 border-zinc-800">
+                                <span class="p-3 pl-5 border-b border-zinc-400 hover:bg-zinc-300" data-value="in_stock"
+                                    data-input="searchStatus">
+                                    Disponible
+                                </span>
+                                <span class="p-3 pl-5 border-b border-zinc-400 hover:bg-zinc-300" data-value="warning"
+                                    data-input="searchStatus">
+                                    Por agotarse
+                                </span>
+                                <span class="p-3 pl-5 border-b border-zinc-400 hover:bg-zinc-300" data-value="out_of_stock"
+                                    data-input="searchStatus">
+                                    Agotado
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="hidden w-full overflow-hidden overflow-x-auto rounded sm:block customScrollbar">
                     <table class="w-full text-left">
                         <thead class="text-white bg-zinc-900">
@@ -48,7 +95,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="text-white">
+                        <tbody class="text-white" id="tableProduct">
                             @forelse ($products as $product)
                                 <tr class="border-t-4 border-black bg-zinc-950">
                                     <td class="px-6 py-2 text-base border-b-4 border-black whitespace-nowrap">
@@ -93,42 +140,44 @@
                                                     class="px-4 py-1 text-base text-yellow-200 bg-yellow-600 bg-opacity-20 rounded-3xl">
                                                     Por agotarse
                                                 </span>
+                                            @break
 
-                                                @default
-                                            @endswitch
-                                        </td>
-                                        <td class="px-6 py-2 border-b-4 border-black">
-                                            <div class="flex gap-2 text-base">
-                                                <a href="{{ route('products.edit', $product->id) }}"
-                                                    class="flex items-center justify-center gap-2 px-2 py-2 text-green-500 rounded hover:bg-green-700 hover:bg-opacity-10">
-                                                    <x:svg-icon icon="edit" class="w-6 h-6 text-current" />
-                                                </a>
-                                                <form action="{{ route('products.destroy', $product->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="button"
-                                                        class="flex items-center justify-center gap-2 px-2 py-2 text-red-600 rounded btnDeleteProduct hover:bg-red-700 hover:bg-opacity-10">
-                                                        <x:svg-icon icon="trash" class="w-6 h-6 text-current" />
-                                                    </button>
-                                                </form>
-                                                <a href="{{ route('products.show', $product->id) }}"
-                                                    class="flex items-center justify-center gap-2 px-2 py-2 text-yellow-500 rounded hover:bg-yellow-700 hover:bg-opacity-10">
-                                                    <x:svg-icon icon="eye" class="w-6 h-6 text-current" />
-                                                </a>
-                                            </div>
+                                            @default
+                                        @endswitch
+                                    </td>
+                                    <td class="px-6 py-2 border-b-4 border-black">
+                                        <div class="flex gap-2 text-base">
+                                            <a href="{{ route('products.edit', $product->id) }}"
+                                                class="flex items-center justify-center gap-2 px-2 py-2 text-green-500 rounded hover:bg-green-700 hover:bg-opacity-10">
+                                                <x:svg-icon icon="edit" class="w-6 h-6 text-current" />
+                                            </a>
+                                            <form action="{{ route('products.destroy', $product->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button"
+                                                    class="flex items-center justify-center gap-2 px-2 py-2 text-red-600 rounded btnDeleteProduct hover:bg-red-700 hover:bg-opacity-10">
+                                                    <x:svg-icon icon="trash" class="w-6 h-6 text-current" />
+                                                </button>
+                                            </form>
+                                            <a href="{{ route('products.show', $product->id) }}"
+                                                class="flex items-center justify-center gap-2 px-2 py-2 text-yellow-500 rounded hover:bg-yellow-700 hover:bg-opacity-10">
+                                                <x:svg-icon icon="eye" class="w-6 h-6 text-current" />
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @empty
+                                    <tr class="text-center border-t-2 border-black bg-zinc-950">
+                                        <td class="px-6 py-4 text-base border-b-2 border-black" colspan="8">
+                                            No hay productos registrados
                                         </td>
                                     </tr>
-                                    @empty
-                                        <tr class="text-center border-t-2 border-black bg-zinc-950">
-                                            <td class="px-6 py-4 text-base border-b-2 border-black" colspan="8">
-                                                No hay productos registrados
-                                            </td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
+                                @endforelse
+                            </tbody>
+                        </table>
+                        {{ $products->links() }}
                     </div>
                 </div>
-            </section>
-        @endsection
+            </div>
+        </section>
+    @endsection

@@ -27,7 +27,9 @@ $(document).ready(function () {
                 .prev(".selected")
                 .find(".item-selected");
             selected.html(item);
-            $("#" + input).val(value);
+            $("#" + input)
+                .val(value)
+                .trigger("searchStatus");
             $(this)
                 .closest(".items-selected")
                 .css("display", "none")
