@@ -106,6 +106,7 @@
                                 @endforelse
                             </tbody>
                         </table>
+                        {{ $movements->links() }}
                     </div>
                 </div>
             </div>
