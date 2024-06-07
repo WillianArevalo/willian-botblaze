@@ -11,7 +11,7 @@ class MovementController extends Controller
 {
     public function index()
     {
-        $movements = Movement::all();
+        $movements = Movement::paginate(10);
         return view("movements.index", ["movements" => $movements]);
     }
 
