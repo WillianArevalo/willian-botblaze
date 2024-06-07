@@ -2,35 +2,52 @@ $(document).ready(function () {
     var selectsContent = $(".selected");
     var items = $(".items-selected span");
     $(selectsContent).each(function () {
-        selectsContent.on("click", function () {
+        $(this).on("click", function () {
+            closeSelects(this);
             var selectedItems = $(this).next(".items-selected");
             selectedItems.toggleClass("show");
-            $(".arrow-select").toggleClass("rotate");
+            $(this).find(".arrow-select").toggleClass("rotate");
             if (selectedItems.hasClass("show")) {
                 selectedItems.css("display", "flex");
-                $(".arrow-select").addClass("rotate");
+                $(this).find(".arrow-select").addClass("rotate");
             } else {
                 selectedItems.css("display", "none");
-                $(".arrow-select").removeClass("rotate");
+                $(this).find(".arrow-select").removeClass("rotate");
             }
         });
     });
 
     $(items).each(function () {
-        items.on("click", function () {
-            var item = $(this).text();
-            var role = $(this).data("role");
+        $(this).on("click", function () {
+            var item = $(this).html();
+            var value = $(this).data("value");
+            var input = $(this).data("input");
             var selected = $(this)
-                .parent()
+                .closest(".items-selected")
                 .prev(".selected")
-                .children(".item-selected");
-            selected.text(item);
-            $("#role").val(role);
-            $(this).parent().css("display", "none");
-            $(this).parent().removeClass("show");
-            $(".arrow-select").removeClass("rotate");
+                .find(".item-selected");
+            selected.html(item);
+            $("#" + input).val(value);
+            $(this)
+                .closest(".items-selected")
+                .css("display", "none")
+                .removeClass("show");
+            $(this)
+                .closest(".selected")
+                .find(".arrow-select")
+                .removeClass("rotate");
         });
     });
+
+    function closeSelects(thisSelect) {
+        $(".items-selected")
+            .not($(thisSelect).next())
+            .removeClass("show")
+            .css("display", "none");
+        $(".arrow-select")
+            .not($(thisSelect).find(".arrow-select"))
+            .removeClass("rotate");
+    }
 
     $(document).on("click", function (e) {
         if (!$(e.target).closest(".selected").length) {
