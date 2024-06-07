@@ -3,10 +3,10 @@
 @section('title', 'Producto')
 
 @section('content')
-    <section class="pt-16 ml-0 lg:ml-64 ">
+    <section class="pt-16 ml-0 text-sm lg:ml-64 md:text-base">
         <div class="h-full p-4 text-white sm:p-8">
             <div class="flex items-center justify-between gap-2">
-                <h1 class="font-bold uppercase text-1xl text-violet-600 sm:text-3xl">Detalle del producto</h1>
+                <h1 class="text-2xl font-bold uppercase text-violet-600 sm:text-3xl">Detalle del producto</h1>
                 <a href="{{ route('products.index') }}"
                     class="flex items-center justify-center gap-2 p-3 px-5 text-white rounded bg-zinc-950">
                     <x:svg-icon icon="arrow-turn" class="w-5 h-5 text-current" />
@@ -15,9 +15,10 @@
             </div>
             <div class="mt-4 rounded bg-zinc-950">
                 <div class="flex flex-col items-start">
-                    <div class="flex items-center justify-between flex-1 w-full p-5 border-b border-zinc-900">
+                    <div
+                        class="flex flex-col items-center justify-between flex-1 w-full gap-3 p-4 border-b sm:p-5 border-zinc-900 sm:flex-row">
                         <h2>
-                            <span class="text-base text-gray-400">Nombre:</span>
+                            <span class="text-gray-400 ">Nombre:</span>
                             <span class="text-2xl font-semibold text-white">{{ $product->name }}</span>
                         </h2>
                         <div class="flex flex-col">
@@ -47,31 +48,31 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-1 w-full gap-2 p-4">
-                        <div class="flex items-center justify-center flex-1 p-5">
-                            <div class="w-full h-full overflow-hidden rounded">
+                    <div class="flex flex-col flex-1 w-full gap-2 md:flex-row">
+                        <div class="flex items-center justify-center flex-1 ">
+                            <div class="w-full h-full overflow-hidden sm:p-4">
                                 <img src="{{ asset('images/products/' . $product->image) }}"
-                                    alt="Image profile {{ $product->name }}" class="object-cover w-full h-full">
+                                    alt="Image profile {{ $product->name }}" class="object-cover w-full h-full sm:rounded">
                             </div>
                         </div>
                         <div class="flex flex-col flex-1 gap-4 p-4">
                             <div class="flex flex-col gap-2">
-                                <label for="price" class="text-base text-gray-400">Precio:</label>
+                                <label for="price" class="text-gray-400 ">Precio:</label>
                                 <p class="text-2xl font-semibold text-violet-600">{{ "$" . $product->price }}</p>
                             </div>
-                            <div class="flex gap-2">
+                            <div class="flex flex-col gap-2 lg:flex-row">
                                 <div class="flex-1 p-4 rounded bg-zinc-900">
                                     <label for="stock" class="text-gray-400 text-md">Cantidad inicial:</label>
                                     <p class="text-lg font-semibold text-white">{{ $product->stockInitial }}</p>
                                 </div>
                                 <div class="flex-1 p-4 rounded bg-zinc-900">
-                                    <label for="stock" class="text-base text-gray-400">Cantidad actual:</label>
+                                    <label for="stock" class="text-gray-400 ">Cantidad actual:</label>
                                     <p class="text-lg font-semibold text-white">{{ $product->stockCurrent }}</p>
                                 </div>
                             </div>
                             <div class="flex flex-col h-full gap-2 p-4 rounded bg-zinc-900">
-                                <label for="price" class="text-base text-gray-400">Descripción:</label>
-                                <p class="text-base text-wrap">{{ $product->description }}</p>
+                                <label for="price" class="text-gray-400 ">Descripción:</label>
+                                <p class=" text-wrap">{{ $product->description }}</p>
                             </div>
                         </div>
                     </div>

@@ -5,10 +5,10 @@
 @endsection
 
 @section('content')
-    <section class="pt-16 ml-64">
-        <div class="text-white bg-black rounded-md sm:p-8">
+    <section class="pt-16 text-sm lg:ml-64 sm:text-base">
+        <div class="p-4 text-white bg-black rounded-md sm:p-8">
             <div class="flex items-center gap-2 justify-left">
-                <h1 class="font-bold text-1xl text-violet-600 sm:text-3xl">
+                <h1 class="text-2xl font-bold text-violet-600 sm:text-3xl">
                     Editar movimiento
                 </h1>
             </div>
@@ -16,7 +16,7 @@
                 <form action="{{ route('movements.update', $movement->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <div class="flex flex-col gap-4 text-base">
+                    <div class="flex flex-col gap-4">
                         <div class="flex flex-col w-full gap-2 md:flex-row">
                             <div class="flex flex-col gap-2 flex-1 lg:flex-[2]">
                                 <label class="text-white after:content-['*'] after:ml-0.5 after:text-red-500"
@@ -26,7 +26,7 @@
                                 <input type="hidden" name="product_id" id="product_id" value="{{ $movement->product_id }}">
                                 <div class="relative flex flex-col gap-2 custom-select">
                                     <div
-                                        class=" text-base flex justify-between p-3 pl-5 text-white border-2 rounded selected bg-zinc-900 @error('product_id') error @else border-zinc-800 @enderror">
+                                        class="  flex justify-between p-3 pl-5 text-white border-2 rounded selected bg-zinc-900 @error('product_id') error @else border-zinc-800 @enderror">
                                         <span class="flex items-center gap-3 item-selected">
                                             <img src="{{ asset('images/products/' . $product->image) }}"
                                                 alt="Imagen producto {{ $product->name }}"
@@ -84,7 +84,7 @@
                                 </label>
                                 <input type="hidden" name="typeMovement" id="typeMovement"
                                     value="{{ $movement->typeMovement }}">
-                                <div class="relative flex flex-col gap-2 text-base custom-select">
+                                <div class="relative flex flex-col gap-2 custom-select">
                                     <div
                                         class="flex justify-between p-3 pl-5 text-white border-2 rounded selected bg-zinc-900 @error('role') error @else border-zinc-800 @enderror">
                                         <span class="flex items-center item-selected">
@@ -207,7 +207,7 @@
                         </div>
                     </div>
 
-                    <div class="flex justify-center gap-2 mt-6 text-base">
+                    <div class="flex justify-center gap-2 mt-6 ">
                         <button type="submit"
                             class="flex items-center justify-center gap-2 p-3 px-5 text-green-100 bg-green-600 rounded bg-opacity-20 w-max hover:bg-opacity-40 hover:text-white focus:outline-none">
                             <x:svg-icon icon="edit" class="w-5 h-5 text-current" />

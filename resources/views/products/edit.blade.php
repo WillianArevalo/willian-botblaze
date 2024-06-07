@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-    <section class="pt-16 ml-64">
-        <div class="text-white bg-black rounded-md sm:p-8">
+    <section class="pt-16 text-sm lg:ml-64 sm:text-base">
+        <div class="p-4 text-white bg-black rounded-md sm:p-8">
             <div class="flex items-center gap-2 justify-left">
                 <h1 class="text-3xl font-bold text-violet-600">Editar producto</h1>
             </div>
@@ -14,7 +14,7 @@
                 <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <div class="flex flex-col gap-4 text-base">
+                    <div class="flex flex-col gap-4 ">
                         <div class="flex flex-col w-full gap-2 md:flex-row">
                             <div class="flex flex-col gap-2 sm:flex-[1] lg:flex-[4]">
                                 <label class="text-white after:content-['*'] after:ml-0.5 after:text-red-500"
@@ -110,7 +110,7 @@
                                     @enderror
                                 </div>
                                 @if ($searchMovement)
-                                    <span class="flex items-center p-2 text-xs text-red-500">
+                                    <span class="flex items-center p-2 text-blue-500">
                                         No se puede editar la cantidad inicial, ya que existen movimientos registrados
                                     </span>
                                 @endif
@@ -144,7 +144,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="flex justify-center gap-2 mt-6 text-base">
+                    <div class="flex justify-center gap-2 mt-6 ">
                         <button type="submit"
                             class="flex items-center justify-center gap-2 p-3 px-5 text-green-100 bg-green-600 rounded bg-opacity-20 w-max hover:bg-opacity-40 hover:text-white focus:outline-none">
                             <x:svg-icon icon="edit" class="w-5 h-5 text-current" />
