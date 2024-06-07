@@ -21,9 +21,11 @@ $(document).ready(function () {
 
     $(".buttonHamburger").click(function () {
         $(".adminHeader").toggleClass("active");
+        $(".body").toggleClass("overflow-hidden");
     });
 
     $(".buttonClose").click(function () {
         $(".adminHeader").removeClass("active");
+        $(".body").removeClass("overflow-hidden");
     });
 });

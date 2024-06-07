@@ -31,6 +31,22 @@ $(document).ready(function () {
         });
     });
 
+    let myValue = $(".window");
+    function updateValueBasedOnScreenSize() {
+        const mediaQuery = window.matchMedia("(max-width: 640px)");
+        function handleScreenSizeChange(event) {
+            if (event.matches) {
+                myValue.val("mobile");
+            } else {
+                myValue.val("desktop");
+            }
+            console.log("El valor actual es:", myValue);
+        }
+        mediaQuery.addListener(handleScreenSizeChange);
+        handleScreenSizeChange(mediaQuery);
+    }
+    updateValueBasedOnScreenSize();
+
     $("#inputSearchProduct").on("input", function () {
         let data = $("#formSearch").serialize();
         $("#inputSearchStatus").val("");
@@ -39,7 +55,11 @@ $(document).ready(function () {
             type: "POST",
             data: data,
             success: function (response) {
-                $("#tableProduct").html(response);
+                if (myValue.val() == "mobile") {
+                    $("#cardsProduct").html(response);
+                } else {
+                    $("#tableProduct").html(response);
+                }
             },
         });
     });
@@ -52,7 +72,11 @@ $(document).ready(function () {
             type: "POST",
             data: data,
             success: function (response) {
-                $("#tableProduct").html(response);
+                if (myValue.val() == "mobile") {
+                    $("#cardsProduct").html(response);
+                } else {
+                    $("#tableProduct").html(response);
+                }
             },
         });
     });

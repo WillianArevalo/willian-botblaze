@@ -156,6 +156,13 @@ class ProductController extends Controller
             $query->where("status", $status);
         }
         $products = $query->get();
-        return view("layouts.__partials.product-row", ["products" => $products]);
+
+        $window = $request->input("window");
+
+        if ($window == "desktop") {
+            return view("layouts.__partials.product-row", ["products" => $products]);
+        } else {
+            return view("layouts.__partials.card-product", ["products" => $products]);
+        }
     }
 }
