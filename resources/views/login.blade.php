@@ -56,15 +56,7 @@
                                 Iniciar sesión
                             </button>
                         </div>
-                        <div class="mt-4">
-                            <a href="" class="underline text-violet-600 hover:text-violet-800">¿Olvidaste tu
-                                contraseña?</a>
-                        </div>
                     </form>
-                    <div class="flex gap-2 mt-2 text-left">
-                        <p class="font-medium text-zinc-400">¿No tienes una cuenta?</p>
-                        <a href="" class="underline text-violet-600 hover:text-violet-800">Registrarse</a>
-                    </div>
                 </div>
             </div>
         </div>
