@@ -9,6 +9,11 @@ class Product extends Model
 {
     use HasFactory;
 
+    public function movements()
+    {
+        return $this->hasMany(Movement::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

@@ -9,6 +9,11 @@ class Movement extends Model
 {
     use HasFactory;
 
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

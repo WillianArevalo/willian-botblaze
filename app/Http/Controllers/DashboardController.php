@@ -9,7 +9,10 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index()
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(): \Illuminate\Contracts\View\View
     {
         $userCount = User::count();
         $productCount = Product::count();

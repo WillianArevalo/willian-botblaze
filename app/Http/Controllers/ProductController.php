@@ -13,8 +13,9 @@ class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * 
      */
-    public function index()
+    public function index(): \Illuminate\Contracts\View\View
     {
         $products = Product::paginate(10);
         return view("products.index", ["products" => $products]);
@@ -23,15 +24,16 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): \Illuminate\Contracts\View\View
     {
         return view("products.create");
     }
 
     /**
      * Store a newly created resource in storage.
+     * @param ProductRequest $request 
      */
-    public function store(ProductRequest $request)
+    public function store(ProductRequest $request): \Illuminate\Http\RedirectResponse
     {
         $validateData = $request->validated();
         $validateData["stockCurrent"] = $validateData["stockInitial"];
@@ -50,26 +52,28 @@ class ProductController extends Controller
         $movement->description = "Entrada inicial del producto";
         $movement->date = now();
         $movement->save();
-        return redirect()->route("products.index")->with("success", "Product created and movement initial created");
+        return redirect()->route("products.index")->with("success", "Producto y movimiento inicial creado correctamente");
     }
 
     /**
      * Display the specified resource.
+     * @param string $id
      */
-    public function show(string $id)
+    public function show(string $id): \Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
     {
         $product = Product::find($id);
         if ($product) {
             return view("products.show", ["product" => $product]);
         } else {
-            return redirect()->route("products.index")->with("error", "Product not found");
+            return redirect()->route("products.index")->with("error", "Producto no encontrado");
         }
     }
 
     /**
      * Show the form for editing the specified resource.
+     * @param string $id
      */
-    public function edit(string $id)
+    public function edit(string $id): \Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
     {
         $product = Product::find($id);
         if ($product) {
@@ -80,14 +84,16 @@ class ProductController extends Controller
             }
             return view("products.edit", ["product" => $product, "searchMovement" => $searchMovement]);
         } else {
-            return redirect()->route("products.index")->with("error", "Product not found");
+            return redirect()->route("products.index")->with("error", "Producto no encontrado");
         }
     }
 
     /**
      * Update the specified resource in storage.
+     * @param ProductRequest $request
+     * @param string $id
      */
-    public function update(ProductRequest $request, string $id)
+    public function update(ProductRequest $request, string $id): \Illuminate\Http\RedirectResponse
     {
         $validateData = $request->validated();
         $product = Product::find($id);
@@ -95,7 +101,7 @@ class ProductController extends Controller
         $movement = Movement::where("product_id", $product->id);
         if ($movement->count() > 0) {
             if ($product->stockInitial != $validateData["stockInitial"]) {
-                return redirect()->route("products.index")->with("error", "Product has movements");
+                return redirect()->route("products.index")->with("error", "No se puede modificar el stock inicial, ya existen movimientos asociados al producto");
             }
         }
 
@@ -117,16 +123,17 @@ class ProductController extends Controller
             $newStockCurrent = $product->stockCurrent - $product->stockInitial + $validateData["stockInitial"];
             $validateData["stockCurrent"] = $newStockCurrent;
             $product->update($validateData);
-            return redirect()->route("products.index")->with("success", "Product updated");
+            return redirect()->route("products.index")->with("success", "Producto actualizado correctamente");
         } else {
-            return redirect()->route("products.index")->with("error", "Product not found");
+            return redirect()->route("products.index")->with("error", "Producto no encontrado");
         }
     }
 
     /**
      * Remove the specified resource from storage.
+     * @param string $id
      */
-    public function destroy(string $id)
+    public function destroy(string $id): \Illuminate\Http\RedirectResponse
     {
         $product = Product::find($id);
         if ($product) {
@@ -143,7 +150,12 @@ class ProductController extends Controller
         }
     }
 
-    public function search(Request $request)
+    /**
+     *  Search for a product
+     *  @param Request $request 
+     */
+
+    public function search(Request $request): \Illuminate\Contracts\View\View
     {
         $query = Product::query();
         if ($request->input("searchProduct")) {

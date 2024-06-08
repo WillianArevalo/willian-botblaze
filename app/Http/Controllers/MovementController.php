@@ -9,25 +9,41 @@ use Illuminate\Http\Request;
 
 class MovementController extends Controller
 {
-    public function index()
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(): \Illuminate\Contracts\View\View
     {
-        $movements = Movement::paginate(10);
+        $movements = Movement::with("product")->paginate(10);
         return view("movements.index", ["movements" => $movements]);
     }
 
-    public function input()
+    /**
+     * Show the form for creating a new resource.
+     * 
+     */
+    public function input(): \Illuminate\Contracts\View\View
     {
         $products = Product::all();
         return view("movements.create", ["type" => "input", "products" => $products]);
     }
 
-    public function output()
+    /**
+     * Show the form for creating a new resource.
+     * 
+     */
+    public function output(): \Illuminate\Contracts\View\View
     {
         $products = Product::all()->where("stockCurrent", ">", 0);
         return view("movements.create", ["type" => "output", "products" => $products]);
     }
 
-    public function store(MovementRequest $request)
+    /**
+     * Store a newly created resource in storage.
+     * @param MovementRequest $request
+     */
+    public function store(MovementRequest $request): \Illuminate\Http\RedirectResponse
     {
         $validateData = $request->validated();
         $product = Product::find($validateData["product_id"]);
@@ -44,31 +60,31 @@ class MovementController extends Controller
                     return redirect()->route("movements.index")->with("error", "Initial stock must be equal to the quantity");
                 }
             }
-
             if ($validateData["typeMovement"] == "input") {
                 $stock = $product->stockCurrent + $validateData["quantity"];
                 $product->stockCurrent = $stock;
             } else {
-
                 if ($product->stockCurrent < $validateData["quantity"]) {
-                    return redirect()->route("movements.index")->with("error", "Insufficient stock");
+                    return redirect()->route("movements.index")->with("error", "No hay suficiente stock para realizar la salida");
                 }
-
                 $stock = $product->stockCurrent -  $validateData["quantity"];
-                $product->status = $this->updateStatus($stock);
                 $product->stockCurrent = $stock;
             }
         } else {
-            return redirect()->route("movements.index")->with("error", "Product not found");
+            return redirect()->route("movements.index")->with("error", "Producto no encontrado");
         }
+        $product->status = $this->updateStatus($stock);
         $product->save();
         Movement::create($validateData);
-        return redirect()->route("movements.index")->with("success", "Movement created");
+        return redirect()->route("movements.index")->with("success", "Movimiento creado correctamente");
     }
 
-    public function edit($id)
+    /**
+     * Display the specified resource.
+     * @param string $id
+     */
+    public function edit($id): \Illuminate\Contracts\View\View
     {
-
         $movement = Movement::find($id);
         $product = Product::find($movement->product_id);
 
@@ -83,7 +99,12 @@ class MovementController extends Controller
         return view("movements.edit", ["movement" => $movement, "product" => $product, "products" => $products, "isMovementInitial" => $isMovementInital]);
     }
 
-    public function update(MovementRequest $request, string $id)
+    /**
+     * Update the specified resource in storage.
+     * @param MovementRequest $request
+     * @param string $id
+     */
+    public function update(MovementRequest $request, string $id): \Illuminate\Http\RedirectResponse
     {
         $validateData = $request->validated();
         $movement = Movement::find($id);
@@ -136,11 +157,15 @@ class MovementController extends Controller
             $movement->update($validateData);
             return redirect()->route("movements.index")->with("success", "Movement updated");
         } else {
-            return redirect()->route("movements.index")->with("error", "Movement not found");
+            return redirect()->route("movements.index")->with("error", "Movimiento no encontrado");
         }
     }
 
-    public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     * @param string $id
+     */
+    public function destroy($id): \Illuminate\Http\RedirectResponse
     {
         $movement = Movement::find($id);
         if ($movement) {
@@ -162,17 +187,21 @@ class MovementController extends Controller
                 $product->stockCurrent = $stock;
                 $product->save();
             } else {
-                return redirect()->route("movements.index")->with("error", "Product not found");
+                return redirect()->route("movements.index")->with("error", "Producto no encontrado");
             }
 
             $movement->delete();
-            return redirect()->route("movements.index")->with("success", "Movement deleted");
+            return redirect()->route("movements.index")->with("success", "Movimiento eliminado correctamente");
         } else {
-            return redirect()->route("movements.index")->with("error", "Movement not found");
+            return redirect()->route("movements.index")->with("error", "Movimiento no encontrado");
         }
     }
 
-    public function updateStatus($stock)
+    /**
+     * Update the status of the product
+     * @param int $stock
+     */
+    public function updateStatus(int $stock): string
     {
         if ($stock <= 5 && !($stock === 0)) {
             return "warning";
@@ -183,7 +212,12 @@ class MovementController extends Controller
         }
     }
 
-    public function validateStock($stockCurrent, $quantity)
+    /**
+     * Validate the stock
+     * @param int $stockCurrent
+     * @param int $quantity
+     */
+    public function validateStock(int $stockCurrent, int $quantity): bool
     {
         if ($stockCurrent < $quantity) {
             return false;

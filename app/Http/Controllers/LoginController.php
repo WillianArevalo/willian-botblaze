@@ -10,12 +10,19 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    public function index()
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(): \Illuminate\Contracts\View\View
     {
         return view("login");
     }
 
-    public function validate(LoginRequest $request)
+    /**
+     * Validate the user login
+     * @param LoginRequest $request
+     */
+    public function validate(LoginRequest $request): \Illuminate\Http\RedirectResponse
     {
         $credentials = $request->only("email", "password");
         $user = User::where("email", $credentials["email"])->first();
@@ -43,8 +50,10 @@ class LoginController extends Controller
         return redirect("/dashboard")->with("success", "Bienvenido, inicio de sesión correcto");
     }
 
-
-    public function logout()
+    /**
+     * Close the user session
+     */
+    public function logout(): \Illuminate\Http\RedirectResponse
     {
         Auth::logout();
         session()->flush();
