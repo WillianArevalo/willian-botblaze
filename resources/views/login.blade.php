@@ -14,7 +14,7 @@
                         <div class="flex flex-col gap-2">
                             <label for="email" class="text-white">Correo</label>
                             <div
-                                class="flex items-center w-full text-white border-2  rounded bg-zinc-900 focus-within:border-violet-600 @error('email') border-red-500 @else border-zinc-800 @enderror">
+                                class="flex items-center w-full text-white border-2  rounded bg-zinc-900 focus-within:border-violet-600 @error('email') error @else border-zinc-800 @enderror">
                                 <input type="email" name="email" id="email"
                                     class="w-full p-3 pl-5 text-current bg-transparent border-2 border-transparent placeholder:text-zinc-600 focus:outline-none"
                                     placeholder="example@example.com" value="{{ old('email') }}">
@@ -33,7 +33,7 @@
                         <div class="flex flex-col gap-2">
                             <label for="password" class="text-white">Contraseña</label>
                             <div
-                                class="flex items-center w-full text-white border-2  rounded bg-zinc-900 focus-within:border-violet-600 @error('password') border-red-500 @else border-zinc-800  @enderror">
+                                class="flex items-center w-full text-white border-2  rounded bg-zinc-900 focus-within:border-violet-600 @error('password') error @else border-zinc-800  @enderror">
                                 <input type="password" name="password" id="password"
                                     class="w-full p-3 pl-5 text-current bg-transparent border-2 border-transparent placeholder:text-zinc-600 focus:outline-none"
                                     placeholder="Ingrese su contraseña">

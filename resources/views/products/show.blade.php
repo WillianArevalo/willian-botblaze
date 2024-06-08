@@ -3,7 +3,7 @@
 @section('title', 'Producto')
 
 @section('content')
-    <section class="pt-16 ml-0 text-sm lg:ml-64 md:text-base">
+    <section class="text-sm  md:text-base">
         <div class="h-full p-4 text-white sm:p-8">
             <div class="flex items-center justify-between gap-2">
                 <h1 class="text-2xl font-bold uppercase text-violet-600 sm:text-3xl">Detalle del producto</h1>

@@ -4,7 +4,7 @@
 @section('title', 'Movimientos')
 
 @section('content')
-    <section class="text-sm  sm:text-base">
+    <section class="text-sm sm:text-base">
         <div class="h-full p-4 text-white sm:p-8">
             <div class="flex items-center gap-2 justify-left">
                 <h1 class="text-2xl font-bold uppercase text-violet-600 sm:text-3xl">Movimientos</h1>
@@ -33,6 +33,9 @@
                                     #
                                 </th>
                                 <th class="px-6 py-6 font-medium leading-4">
+                                    Producto
+                                </th>
+                                <th class="px-6 py-6 font-medium leading-4">
                                     Tipo
                                 </th>
                                 <th class="px-6 py-6 font-medium leading-4">
@@ -54,6 +57,9 @@
                                 <tr class="border-t-4 border-black bg-zinc-950">
                                     <td class="px-6 py-2 border-b-4 border-black whitespace-nowrap">
                                         {{ $loop->iteration }}
+                                    </td>
+                                    <td class="px-6 py-2 border-b-4 border-black whitespace-nowrap">
+                                        {{ $movement->product->name }}
                                     </td>
                                     <td class="px-6 py-2 border-b-4 border-black whitespace-nowrap">
                                         @switch($movement->typeMovement)
@@ -112,6 +118,14 @@
                     <div class="flex flex-col w-full gap-4">
                         @forelse ($movements as $movement)
                             <div class="flex flex-col gap-2 rounded bg-zinc-950">
+                                <div class="flex items-center justify-between p-4 rounded-t bg-zinc-900">
+                                    <h6 class="text-gray-200 ">
+                                        <span class="font-semibold text-violet-600">
+                                            Producto:
+                                        </span>
+                                        {{ $movement->product->name }}
+                                    </h6>
+                                </div>
                                 <div class="flex items-center justify-between px-4 py-2">
                                     <h6 class="text-gray-400 ">Tipo:</h6>
                                     @switch($movement->typeMovement)

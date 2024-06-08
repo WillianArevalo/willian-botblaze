@@ -22,7 +22,7 @@
     @if (Route::currentRouteName() !== 'login')
         @include('layouts.__partials.navbar')
     @endif
-    <main>
+    <main @if (Route::currentRouteName() != 'login') class="mainAdmin" @endif>
         @if (Route::currentRouteName() !== 'login')
             @include('layouts.__partials.topbar')
         @endif
