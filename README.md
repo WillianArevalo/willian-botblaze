@@ -1,66 +1,132 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Prueba Técnica Laravel
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. [Introducción](#introducción)
+2. [Instalación](#instalación)
+3. [Uso](#uso)
+4. [Páginas](#páginas)
+5. [Estructura](#estructura)
+6. [Funcionamiento básico de la aplicación](#funcionamiento-básico-de-la-aplicación)
+7. [Credenciales](#credenciales)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Introducción
+Creación de un sistema básico para administrar productos y parte de su inventario, se registran los productos, y por consecuente se van registrando sus entradas y salidas, manteniendo un historial de ellas.
 
-## Learning Laravel
+Tecnologías utilizadas:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- [Laravel](https://laravel.com).
+- [Tailwind CSS](https://tailwindcss.com/).
+- [jQuery](https://jquery.com).
+- [Toastify JS](https://apvarun.github.io/toastify-js/).
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Iconos:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- [HugeIcons](https://hugeicons.com/icons).
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Instalación
 
-### Premium Partners
+Clonar repositorio: https://github.com/WillianArevalo/willian-botblaze
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
 
-## Contributing
+## Uso
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Ejecutar los siguientes comandos:
 
-## Code of Conduct
+```npm run dev``` para compilar los assets.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```php artisan migrate``` para crear las tablas en la base de datos.
 
-## Security Vulnerabilities
+```php artisan db:seed``` para poblar la base de datos.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```php artisan serve``` para iniciar el servidor.
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Páginas
+
+### Inicio de Sesión 
+    Página de inicio de sesión.
+![Login](desing/login.png)
+
+### Dashboard
+    Página principal del sistema, muestra un resumen de los movimeintos de los productos.
+
+![Dashboard](desing/dashboard.png)
+
+### Productos
+    Página donde se listan los productos registrados, se pueden agregar, editar y eliminar productos.
+
+![Productos](desing/products.png)
+
+### Movimientos
+    Página donde se listan los movimientos de los productos, se pueden agregar, editar y eliminar movimientos.
+
+![Movimientos](desing/movements.png)
+
+
+### Estructura 
+
+La conexión entre el modelo, el controlador y la ruta sigue un patrón comun en Laravel MVC.
+
+- **Modelo**: Se encuentra en la carpeta `app/Models`.
+    Es el responsable de interactuar con la base de datos. Representa la estructura de los datos de las tablas de Usuario, Productos y Movimientos.
+
+    En la aplicación, los modelos son:
+    - `User`: Representa la tabla de usuarios.
+    - `Product`: Representa la tabla de productos.
+    - `Movement`: Representa la tabla de movimientos.
+
+- **Controlador**: Se encuentra en la carpeta `app/Http/Controllers`.
+    Es el responsable de manejar las peticiones del usuario, interactuar con el modelo y devolver una respuesta.
+    Cada controlador tiene un método que se encarga de mostrar la vista correspondiente y de obtener los datos necesarios para mostrarla.
+
+    En la aplicación, los controladores son:
+    - `LoginController`: Controlador de inicio de sesión, valida la sesión y muestra la vista del login.
+    - `DashboardController`: Controlador de la página principal.
+    - `ProductController`: Controlador de los productos (crear, eliminar, editar y ver).
+    - `MovementController`: Controlador de los movimientos (crear, eliminar, editar).
+
+
+- **Rutas**: Se encuentra en el archivo `routes/web.php`.
+    Es el responsable de definir las rutas de la aplicación, es decir, las URL que el usuario puede visitar y las acciones que se deben realizar cuando se visita una URL en específico.
+
+    En la aplicación, las rutas son:
+    - `/`: Ruta de la página principal (Login).
+    - `/logout`: Ruta para cerrar sesión.
+    - `/products`: Ruta de la página de productos.
+    - `/movements`: Ruta de la página de movimientos.
+    - `/dashboard`: Página principal de la aplicación.
+
+
+## Funcionamiento básico de la aplicación
+
+    Registro de Productos
+    - Se puede registrar un producto en la página de productos.
+    - Se debe ingresar el nombre, la descripción y la cantidad inicial del producto.
+    - Al registrar un producto, se crea un movimiento de entrada con la cantidad inicial.
+
+    Registro de Movimientos
+    - Se puede registrar un movimiento en la página de movimientos.
+    - Se debe seleccionar el producto,la cantidad, la descripción y la fecha.
+    - Al registrar un movimiento, se actualiza la cantidad del producto y se crea un registro en la tabla de movimientos.
+
+    Edición de Productos
+    - Se puede editar un producto en la página de productos.
+    - Se puede editar el nombre, la descripción y la cantidad del producto.
+    - No se puede editar la cantidad si existen movimientos registrados.
+    
+    Edición de Movimientos
+    - Se puede editar un movimiento en la página de movimientos.
+    - Se puede editar el producto, el tipo de movimiento y la cantidad.
+    
+
+#### Credenciales
+
+- Correo: admin@gmail.com
+- Contraseña: admin
+
+
+
