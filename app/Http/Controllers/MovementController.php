@@ -132,7 +132,7 @@ class MovementController extends Controller
                         case "input":
                             $stockCurrent = $product->stockCurrent - $movement->quantity;
                             if (!$this->validateStock($stockCurrent, $quantity)) {
-                                return redirect()->route("movements.index")->with("error", "Insufficient stock");
+                                return redirect()->route("movements.index")->with("error", "No se puedo editar, no hay suficiente stock para registar la salida");
                             }
                             $newStock = $stockCurrent - $quantity;
                             break;
@@ -140,7 +140,7 @@ class MovementController extends Controller
                             $stockCurrent = $product->stockCurrent + $movement->quantity;
 
                             if (!$this->validateStock($stockCurrent, $quantity)) {
-                                return redirect()->route("movements.index")->with("error", "Insufficient stock");
+                                return redirect()->route("movements.index")->with("error", "No se puedo editar, no hay suficiente stock para registar la salida");
                             }
 
                             $newStock = $stockCurrent - $quantity;
@@ -151,11 +151,11 @@ class MovementController extends Controller
                     $product->stockCurrent = $newStock;
                 }
             } else {
-                return redirect()->route("movements.index")->with("error", "Product not found");
+                return redirect()->route("movements.index")->with("error", "Producto no encontrado");
             }
             $product->save();
             $movement->update($validateData);
-            return redirect()->route("movements.index")->with("success", "Movement updated");
+            return redirect()->route("movements.index")->with("success", "Movimiento actualizado correctamente");
         } else {
             return redirect()->route("movements.index")->with("error", "Movimiento no encontrado");
         }
