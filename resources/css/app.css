@@ -33,7 +33,7 @@ main {
     height: 100%;
 }
 
-main,
+.mainAdmin,
 footer {
     width: calc(100% - 249px);
     margin-left: auto;
